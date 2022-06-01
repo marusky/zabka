@@ -1,42 +1,40 @@
 %p#notice= notice
 
 %div{ data: { controller: 'levels', level_id: @level.id } }
-  %div{ data: { levels_target: 'form' } }
-    - @level.layout.each_with_index do |row, row_num|
-      %div
-        - row.each_with_index do |block, block_num|
-          %div{ id: "block#{row_num}#{block_num}", class: "block #{block}", data: { reflex: 'click->Level#change_block_type', reflex_dataset: 'combined', layout_row: row_num, layout_block: block_num } }
+  %div{ id: 'form', data: { levels_target: 'form', reflex_root: '#form' } }
     - if @level.persisted?
-      infds
+      - @level.layout.each_with_index do |row, row_num|
+        %div
+          - row.each_with_index do |block, block_num|
+            %div{ id: "block#{row_num}#{block_num}",
+              class: "block #{block}",
+              data: {
+                action: "#{'dragover->levels#on_drag_over drop->levels#drop' if block == 'r'}",
+                reflex: 'click->Level#change_block_type',
+                reflex_dataset: 'combined',
+                layout_row: row_num,
+                layout_block: block_num
+                }
+              }
+              = image_tag 'frog-icon.png', class: 'frog', id: 'frog', draggable: true, data: { action: 'dragstart->levels#drag' } if @level.frog_here?(row_num, block_num)
+      -# = button_tag 'save', data: { reflex: 'click->Level#show_level_error', reflex_dataset: 'combined', }
+      -# %div#error_field
+      = button_tag 'col+', data: { reflex: 'click->Level#update_layout', type: 'col+', reflex_dataset: 'combined', }
+      = button_tag 'col-', data: { reflex: 'click->Level#update_layout', type: 'col-', reflex_dataset: 'combined', }
+      = button_tag 'row+', data: { reflex: 'click->Level#update_layout', type: 'row+', reflex_dataset: 'combined', }
+      = button_tag 'row-', data: { reflex: 'click->Level#update_layout', type: 'row-', reflex_dataset: 'combined', }
     - else
       = render 'levels/form'
   %button{ data: { action: 'click->levels#hello' } }
     show/hide
 
-  %div{id: "zmen_meno", data: { reflex: 'click->Level#zmen_meno' } }
+  %div{ id: "zmen_meno", data: { reflex: 'click->Level#zmen_meno' } }
     povodne meno
-
-
-
-
-
 
 - @library.levels.each do |level|
   %p
     = level.title
 
-= 'empty' if @library.levels.empty?
-
-
-%p
-  %b Title:
-  = @library.title
-%p
-  %b Code:
-  = @library.code
-%p
-  %b Teacher:
-  = @library.teacher_id
 
 = link_to 'Edit', edit_library_path(@library)
 \|

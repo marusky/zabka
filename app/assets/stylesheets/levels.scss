@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+* {
+  box-sizing: border-box;
+}
+
 .r, .w {
   border-radius: 30px 60px 18px 32px;
 
@@ -18,4 +22,10 @@
 
 .w {
   background: rgb(24, 33, 54);
+}
+
+.frog {
+  width: 60px;
+  margin: 0;
+  padding: 0;
 }
