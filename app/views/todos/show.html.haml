@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @todo.title
+%p
+  %strong Done:
+  = @todo.done
+= link_to 'Edit', edit_todo_path(@todo)
+|
+= link_to 'Back', todos_path

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @level.title
+%p
+  %b Control:
+  = @level.control
+%p
+  %b Frog:
+  = @level.frog
+%p
+  %b Layout:
+  = @level.layout
+
+= link_to 'Edit', edit_level_path(@level)
+\|
+= link_to 'Back', levels_path

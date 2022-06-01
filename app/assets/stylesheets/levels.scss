@@ -1,0 +1,21 @@
+// Place all the styles related to the Levels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.r, .w {
+  border-radius: 30px 60px 18px 32px;
+
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.r {
+  background: linear-gradient(#90909a, #5f5f75);
+}
+
+.w {
+  background: rgb(24, 33, 54);
+}

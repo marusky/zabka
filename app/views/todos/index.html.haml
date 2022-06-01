@@ -1,0 +1,17 @@
+%p#notice= notice
+%h1 Todos
+
+= render 'form', todo: @todo
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Done
+  %tbody
+    - @todos.each do |todo|
+      %tr
+        %td= todo.title
+        %td
+          %input{ type: 'checkbox', data: { reflex: 'click->Todo#pokus', todo_id: todo.id }, checked: todo.done }
+= link_to 'New Todo', new_todo_path
