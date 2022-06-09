@@ -1,2 +1,9 @@
-%h1 Pages#home
-%p Find me in app/views/pages/home.html.haml
+.home{ data: { controller: 'application', level_id: @level_id,  } }
+  %h1
+    Pripraviť sa, pozor...
+  %input{ placeholder: 'abcdef', data: { application_target: 'code' } }
+  #error{ data: { application_target: 'error' } }
+    = @error
+  %button{ data: { action: 'click->application#openLibrary' } }
+    skok!
+

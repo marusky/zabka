@@ -1,11 +1,6 @@
 class LevelsController < ApplicationController
   before_action :set_level, only: %i[ show edit update destroy ]
 
-  # GET /levels or /levels.json
-  def index
-    @levels = Level.all
-  end
-
   # GET /levels/1 or /levels/1.json
   def show
   end

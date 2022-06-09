@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationReflex < StimulusReflex::Reflex
+
+  def aco(value)
+    library = Library.find_by(code: value)
+
+    return @error = 'Knižnica s daným kódom neexistuje' unless library
+
+    @level_id = library.levels.order(:position).first.id
+  end
   # Put application-wide Reflex behavior and callbacks in this file. 
   #
   # Example:

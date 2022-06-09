@@ -13,9 +13,21 @@ import StimulusReflex from 'stimulus_reflex'
  * Learn more at: https://docs.stimulusreflex.com
  */
 export default class extends Controller {
+  static targets = [ "code", "error" ]
   connect () {
     StimulusReflex.register(this)
   }
+
+  openLibrary () {
+    const value = this.codeTarget.value
+    if (value.length === 6) {
+      this.stimulate('application#aco', value)
+    } else {
+      this.errorTarget.innerText = 'Kód musí byť dĺžky 6-znakov.'
+    }
+  }
+
+
 
   /* Application-wide lifecycle methods
    *
@@ -51,6 +63,11 @@ export default class extends Controller {
   }
 
   afterReflex (element, reflex, noop, reflexId) {
+    const id = element.dataset.levelId
+    if (id === undefined) return
+
+    window.location.replace(`${window.location.href}levels/${id}`);
+
     // document.body.classList.remove('wait')
   }
 

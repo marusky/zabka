@@ -17,15 +17,15 @@
 }
 
 .j {
-  background: linear-gradient(#faf362, #947e25);
+  background: linear-gradient(#faf362, #73f5ea);
 }
 
 .r {
-  background: linear-gradient(#90909a, #5f5f75);
+  background: linear-gradient(30deg, #9ca6a9, #cbe3e1);
 }
 
 .w {
-  background: rgb(24, 33, 54);
+  background: transparent;
 }
 
 .frog {
@@ -38,8 +38,82 @@
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  background: #999999;
+  background: linear-gradient(#faf362, #73f5ea);
+  margin: 0 5px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+
+.level-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  [disabled] {
+    color: #b0b0b0;
+    text-decoration: line-through;
+  }
+
+  .level {
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+    //align-items: center;
+    //gap: 50px;
+
+    #canvas {
+      background: linear-gradient(30deg, #c1f7ff, #d4f0fa);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    #frog-moves {
+      position: fixed;
+      bottom: 40px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title {
+      margin-bottom: 50px;
+      font-size: 2.5em;
+      font-weight: bold;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .row {
+      display: flex;
+      gap: 150px;
+
+
+      .controls {
+
+        .controls-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        img {
+          width: 50px;
+        }
+        button {
+          font-size: 2em;
+          margin: 10px;
+        }
+      }
+    }
+  }
+
 }

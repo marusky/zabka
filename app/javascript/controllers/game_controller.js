@@ -32,7 +32,7 @@ export default class extends ApplicationController {
         const moves = Array.from(this.frogMovesTarget.childNodes).map((node) => node.innerText)
 
         this.jumpBtnTarget.disabled = true
-        this.jumpBtnTarget.innerText = 'jumping'
+        // this.jumpBtnTarget.innerText = 'jumping'
 
         moves.forEach((move, index) => {
             setTimeout(() => this.move(move), 300 * index)
@@ -162,7 +162,7 @@ export default class extends ApplicationController {
     }
 
     handle_level_passed() {
-        document.getElementById('level-passed').innerText = 'vyhral si'
+        // document.getElementById('level-passed').innerText = 'vyhral si'
     //    TODO reset by malo resetnut aj toto.
     }
 
