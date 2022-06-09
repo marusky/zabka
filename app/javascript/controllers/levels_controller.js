@@ -21,4 +21,8 @@ export default class extends ApplicationController {
         e.target.appendChild(document.getElementById(id))
         this.stimulate('Level#change_frog_position', e.target.dataset)
     }
+
+    pokus(e){
+        console.log('hoifd')
+    }
 }

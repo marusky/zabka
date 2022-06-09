@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-.r, .w {
+.r, .w, .j {
   border-radius: 30px 60px 18px 32px;
 
   width: 60px;
@@ -14,6 +14,10 @@
   display: inline-block;
   margin: 10px;
   cursor: pointer;
+}
+
+.j {
+  background: linear-gradient(#faf362, #947e25);
 }
 
 .r {

@@ -1,4 +1,18 @@
+#canvas{ data: { controller: 'game', level_id: @level.id, action: 'keydown@window->game#move'  } }
+  - @level.layout.each_with_index do |row, row_num|
+    %div
+      - row.each_with_index do |block, block_num|
+        %div{ id: "block#{row_num}#{block_num}",
+                class: "block #{block}",
+                }
+          = image_tag 'frog-icon.png', class: 'frog', id: 'frog', data: { game_target: 'frog', level_layout: @level.layout, initial_row: @level.frog[0], initial_block: @level.frog[1] } if @level.frog_here?(row_num, block_num)
+.controls
+  = button_tag '1', data: { reflex: 'click->Level#update_layout', type: 'col+', reflex_dataset: 'combined', }
+
 %p#notice= notice
+= @frog
+
+#level-passed
 
 %p
   %b Title:
