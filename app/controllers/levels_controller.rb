@@ -22,6 +22,7 @@ class LevelsController < ApplicationController
   # POST /levels or /levels.json
   def create
     @level = Level.new(level_params.merge(Level.default_attributes))
+    @level.position = @level.next_position
 
     if @level.save
       redirect_to library_path(@level.library.id, level_id: @level.id)

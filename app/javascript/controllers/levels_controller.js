@@ -1,7 +1,14 @@
 import ApplicationController from './application_controller.js'
+import Sortable from 'sortablejs';
 
 export default class extends ApplicationController {
-    static targets = [ "form", "layout" ]
+    static targets = [ "form", "layout", "levelsList" ]
+
+    connect() {
+        super.connect();
+        var el = document.getElementById('items');
+        var sortable = Sortable.create(el);
+    }
 
     hello(){
         this.formTarget.classList.toggle('hide')
@@ -24,5 +31,13 @@ export default class extends ApplicationController {
 
     pokus(e){
         console.log('hoifd')
+    }
+
+    sort(e) {
+        let levels = Array.from(document.getElementsByClassName('level-row')).map((level, index) => {
+            return {id: level.dataset.specificLevelId, position: index + 1}
+        })
+
+        this.stimulate('level#sort', levels)
     }
 }

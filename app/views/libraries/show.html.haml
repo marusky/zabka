@@ -28,12 +28,12 @@
   %button{ data: { action: 'click->levels#hello' } }
     show/hide
 
-  %div{ id: "zmen_meno", data: { reflex: 'click->Level#zmen_meno' } }
-    povodne meno
-
-- @library.levels.each do |level|
-  %p
-    = level.title
+  %br
+  .div#items{ data: { action: 'drop->levels#sort', levels_target: 'levelsList' } }
+    - @library.levels.order(:position).each do |level|
+      .level-row{ data: { specific_level_id: level.id } }
+        = level.title
+        = level.position
 
 
 = link_to 'Edit', edit_library_path(@library)

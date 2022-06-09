@@ -62,4 +62,12 @@ class LevelReflex < ApplicationReflex
 
     morph "#error_field", 'Neda sa prejst ten level...' unless level.passable?
   end
+
+  def sort(levels)
+    levels.each do |data|
+      Level.find(data['id']).update({ position: data['position'] })
+    end
+
+    morph :nothing
+  end
 end
