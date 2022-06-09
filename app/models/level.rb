@@ -3,8 +3,7 @@ class Level < ApplicationRecord
 
   enum control: {
     programming: 'programming',
-    arrows: 'arrows',
-    keyboard: 'keyboard'
+    direct: 'direct',
   }
 
   def self.random_block
@@ -22,7 +21,7 @@ class Level < ApplicationRecord
   end
 
   def can_add_row?
-    layout.size < 7
+    layout.size < 5
   end
 
   def can_subtract_row?
@@ -30,7 +29,7 @@ class Level < ApplicationRecord
   end
 
   def can_add_col?
-    layout[0]&.size < 9
+    layout[0]&.size < 7
   end
 
   def can_subtract_col?
@@ -62,8 +61,6 @@ class Level < ApplicationRecord
   end
 
   def passable?
-    rock_around = false
-
     layout.each_with_index do |row, row_index|
       row.each_with_index do |block, block_index|
         next if block == 'w'

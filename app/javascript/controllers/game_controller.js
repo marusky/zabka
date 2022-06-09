@@ -3,19 +3,28 @@ import ApplicationController from './application_controller.js'
 export default class extends ApplicationController {
     static targets = [ "frog", "frogMoves", "jumpBtn" ]
 
-    connect() {
-        super.connect();
+    initialize() {
+        const { initialRow, initialBlock, levelLayout } = this.frogTarget.dataset
+
+        this.frog_position = [initialRow, initialBlock]
+        this.levelLayout = JSON.parse(levelLayout)
+        this.is_programming = this.element.dataset.levelType === 'programming'
+        this.stamp_jump()
     }
 
-    keyboard_move(e) {
+    directKeyboard(e) {
         this.move(e.key)
     }
 
-    click_move({ params: { where } }) {
+    directClick({ params: { where } }) {
         this.move(where.toString())
     }
 
-    programming_move({ params: { where } }) {
+    programmingKeyboard(e) {
+        this.add_frog_move(e.key)
+    }
+
+    programmingClick({ params: { where } }) {
         this.add_frog_move(where)
     }
 
@@ -46,20 +55,10 @@ export default class extends ApplicationController {
 
     // private
 
-    initialize() {
-        const { initialRow, initialBlock, levelLayout } = this.frogTarget.dataset
-
-        this.frog_position = [initialRow, initialBlock]
-        this.levelLayout = JSON.parse(levelLayout)
-        this.is_programming = true
-        this.stamp_jump()
-    }
-
     resetLayout() {
         this.levelLayout.forEach((row, rowNum) => {
             row.forEach((oldBlock, blockNum) => {
                 const blockDiv = document.getElementById(`block${rowNum}${blockNum}`)
-                console.log(`${blockDiv.className} -> ${oldBlock}`)
                 blockDiv.className = oldBlock
             })
         })
@@ -155,15 +154,16 @@ export default class extends ApplicationController {
     }
 
     add_frog_move(where) {
-        if ('12346789'.includes(where)) this.frogMovesTarget.innerHTML += `<div class="move" data-action="click->game#removeMove">${where}</div>`;
+        if ('12346789'.includes(where)) this.frogMovesTarget.innerHTML += `<div class="move" ${ this.is_programming ? 'data-action="click->game#removeMove"' : ''} >${where}</div>`;
     }
 
     is_level_passed() {
-        return !this.levelLayout.some(row => /[wr]/.test(row))
+        return !this.levelLayout.some(row => row.includes('r'))
     }
 
     handle_level_passed() {
         document.getElementById('level-passed').innerText = 'vyhral si'
+    //    TODO reset by malo resetnut aj toto.
     }
 
     can_jump_there() {
