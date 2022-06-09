@@ -35,3 +35,5 @@
 = link_to 'Edit', edit_level_path(@level)
 \|
 = link_to 'Back', levels_path
+= link_to 'previous level', @level.previous_level if @level.previous_level
+= link_to 'next level', @level.next_level if @level.next_level

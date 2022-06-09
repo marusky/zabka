@@ -56,10 +56,6 @@ class Level < ApplicationRecord
     }
   end
 
-  def next_position
-    Library.find(library_id).levels.count + 1
-  end
-
   def frog_here?(row, block)
     row == frog[0].to_i && block == frog[1].to_i
   end
@@ -87,5 +83,17 @@ class Level < ApplicationRecord
     end
 
     true
+  end
+
+  def next_position
+    Library.find(library_id).levels.count + 1
+  end
+
+  def next_level
+    Level.find_by(library_id: library_id, position: position + 1)
+  end
+
+  def previous_level
+    Level.find_by(library_id: library_id, position: position - 1)
   end
 end
