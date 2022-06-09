@@ -34,7 +34,7 @@ export default class extends ApplicationController {
     }
 
     sort(e) {
-        let levels = Array.from(document.getElementsByClassName('level-row')).map((level, index) => {
+        let levels = Array.from(document.getElementsByClassName('list-row')).map((level, index) => {
             return {id: level.dataset.specificLevelId, position: index + 1}
         })
 

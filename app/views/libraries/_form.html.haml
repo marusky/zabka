@@ -1,19 +1,17 @@
-= form_for @library do |f|
-  - if @library.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@library.errors.count, "error")} prohibited this library from being saved:"
-      %ul
-        - @library.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :code
-    = f.text_field :code
-  .field
-    = f.label :teacher_id
-    = f.text_field :teacher_id
-  .actions
-    = f.submit 'Save'
+.libraries-new
+  = form_for @library do |f|
+    - if @library.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@library.errors.count, "error")} prohibited this library from being saved:"
+        %ul
+          - @library.errors.full_messages.each do |message|
+            %li= message
+    .fields
+      .field
+        = f.label 'Názov:'
+        = f.text_field :title
+      .field
+        = f.label '6-miestny kód:'
+        = f.text_field :code
+      .actions
+        = f.submit 'Uložiť'

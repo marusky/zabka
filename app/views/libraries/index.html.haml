@@ -1,25 +1,16 @@
-%h1 Listing libraries
+.container
+  .row
+    %h1 Všetky knižnice
+    = link_to new_library_path do
+      .plus +
 
-%table
-  %thead
-    %tr
-      %th Title
-      %th Code
-      %th Teacher
-      %th
-      %th
-      %th
-
-  %tbody
+  .libraries
     - @libraries.each do |library|
-      %tr
-        %td= library.title
-        %td= library.code
-        %td= library.teacher_id
-        %td= link_to 'Show', library
-        %td= link_to 'Edit', edit_library_path(library)
-        %td= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' }
+      = link_to library do
+        .list-row
+          = library.title
+          \|
+          = "##{library.code}"
 
-%br
-
-= link_to 'New Library', new_library_path
+          -#%td= link_to 'Edit', edit_library_path(library)
+          -#%td= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' }

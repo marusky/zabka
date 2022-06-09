@@ -1,42 +1,63 @@
-%p#notice= notice
+.container
+  %div{ data: { controller: 'levels', level_id: @level.id } }
+    = link_to libraries_path do
+      .back
+        <
+    .row
+      %h1= @library.title
+      .plus
+        %button{ data: { action: 'click->levels#hello' } }
+          +
+    .code
+      = "##{@library.code}"
 
-%div{ data: { controller: 'levels', level_id: @level.id } }
-  %div{ id: 'form', data: { levels_target: 'form', reflex_root: '#form' } }
-    - if @level.persisted?
-      - @level.layout.each_with_index do |row, row_num|
-        %div
-          - row.each_with_index do |block, block_num|
-            %div{ id: "block#{row_num}#{block_num}",
-              class: "block #{block}",
-              data: {
-                action: "#{'dragover->levels#on_drag_over drop->levels#drop' if block == 'r'}",
-                reflex: 'click->Level#change_block_type',
-                reflex_dataset: 'combined',
-                layout_row: row_num,
-                layout_block: block_num
-                }
-              }
-              = image_tag 'frog-icon.png', class: 'frog', id: 'frog', draggable: true, data: { action: 'dragstart->levels#drag' } if @level.frog_here?(row_num, block_num)
-      -# = button_tag 'save', data: { reflex: 'click->Level#show_level_error', reflex_dataset: 'combined', }
-      -# %div#error_field
-      = button_tag 'col+', data: { reflex: 'click->Level#update_layout', type: 'col+', reflex_dataset: 'combined', }
-      = button_tag 'col-', data: { reflex: 'click->Level#update_layout', type: 'col-', reflex_dataset: 'combined', }
-      = button_tag 'row+', data: { reflex: 'click->Level#update_layout', type: 'row+', reflex_dataset: 'combined', }
-      = button_tag 'row-', data: { reflex: 'click->Level#update_layout', type: 'row-', reflex_dataset: 'combined', }
-    - else
-      = render 'levels/form'
-  %button{ data: { action: 'click->levels#hello' } }
-    show/hide
+    .modal-background{ id: 'form', data: { levels_target: 'form', reflex_root: '#form' }, class: "#{!@level.persisted? && 'hide'}" }
+      - if @level.persisted?
+        .modal.modal-two{ data: { levels_target: 'form' } }
+          .header
+            %div
+              2/2
+            .close
+              = link_to @library do
+                .hotovo-btn
+                  Hotovo
+              = link_to @level, method: :delete, data: { confirm: 'Tento level sa vymaže. Chcete pokračovať?' } do
+                X
+          - @level.layout.each_with_index do |row, row_num|
+            %div
+              - row.each_with_index do |block, block_num|
+                %div{ id: "block#{row_num}#{block_num}",
+                  class: "block #{block}",
+                  data: {
+                    action: "#{'dragover->levels#on_drag_over drop->levels#drop' if block == 'r'}",
+                    reflex: 'click->Level#change_block_type',
+                    reflex_dataset: 'combined',
+                    layout_row: row_num,
+                    layout_block: block_num
+                    }
+                  }
+                  = image_tag 'frog-icon.png', class: 'frog', id: 'frog', draggable: true, data: { action: 'dragstart->levels#drag' } if @level.frog_here?(row_num, block_num)
+          = button_tag '+', data: { reflex: 'click->Level#update_layout', type: 'col+', reflex_dataset: 'combined' }, class: 'layout-btn right'
+          = button_tag '-', data: { reflex: 'click->Level#update_layout', type: 'col-', reflex_dataset: 'combined' }, class: 'layout-btn left'
+          = button_tag '+', data: { reflex: 'click->Level#update_layout', type: 'row+', reflex_dataset: 'combined' }, class: 'layout-btn bottom'
+          = button_tag '-', data: { reflex: 'click->Level#update_layout', type: 'row-', reflex_dataset: 'combined' }, class: 'layout-btn top'
+      - else
+        .modal.modal-one
+          .header
+            %div
+              1/2
+            .close{ data: { action: 'click->levels#hello' } }
+              X
+          = render 'levels/form'
 
-  %br
-  .div#items{ data: { action: 'drop->levels#sort', levels_target: 'levelsList' } }
-    - @library.levels.order(:position).each do |level|
-      .level-row{ data: { specific_level_id: level.id } }
-        = level.title
-        = level.position
+    %br
 
+    .levels#items{ data: { action: 'drop->levels#sort', levels_target: 'levelsList' } }
+      - @levels.order(:position).each do |level|
+        = link_to library_path(@library, level_id: level.id) do
+          .list-row{ data: { specific_level_id: level.id } }
+            = level.title
+            \|
+            = "#{level.control}"
 
-= link_to 'Edit', edit_library_path(@library)
-\|
-= link_to 'Back', libraries_path
-
+  -# = link_to 'Edit', edit_library_path(@library)

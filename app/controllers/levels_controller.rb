@@ -46,10 +46,7 @@ class LevelsController < ApplicationController
   def destroy
     @level.destroy
 
-    respond_to do |format|
-      format.html { redirect_to levels_url, notice: "Level was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to @level.library
   end
 
   private
