@@ -1,11 +1,11 @@
 class LibrariesController < ApplicationController
+  before_action :set_library, only: [:show, :edit, :update, :destroy]
 
   def index
     @libraries = Library.all
   end
 
   def show
-    @library = Library.find(params[:id])
     @levels = @library.levels
     if params[:level_id]
       @level = Level.find(params[:level_id])
