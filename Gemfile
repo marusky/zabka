@@ -34,6 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]
 gem "hiredis"
+gem "redis-session-store"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

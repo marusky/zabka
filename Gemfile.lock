@@ -194,6 +194,9 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.6.0)
+    redis-session-store (0.11.4)
+      actionpack (>= 3, < 8)
+      redis (>= 3, < 5)
     regexp_parser (2.5.0)
     rexml (3.2.5)
     ruby_parser (3.19.1)
@@ -287,6 +290,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.6)
   redis (>= 4.0)
+  redis-session-store
   sass-rails (>= 6)
   selenium-webdriver
   spring
