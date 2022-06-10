@@ -34,4 +34,5 @@ test:
 production:
   <<: *default
   database: zabky_production
+  url: <%= ENV['DATABASE_URL'] %>
   port: process.env.PORT

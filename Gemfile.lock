@@ -123,6 +123,14 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.5.2)
+    net-imap (0.2.2)
+      digest
+      net-protocol
+      strscan
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
     net-protocol (0.1.2)
       io-wait
       timeout
@@ -217,6 +225,7 @@ GEM
       rack
       rails (>= 5.2)
       redis
+    strscan (3.0.1)
     temple (0.8.2)
     thor (1.2.1)
     thread-local (1.1.0)
@@ -262,6 +271,8 @@ DEPENDENCIES
   haml-rails (~> 2.0)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  net-imap
+  net-pop
   net-smtp
   pg
   puma (~> 5.0)
